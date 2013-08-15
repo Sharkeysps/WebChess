@@ -9,7 +9,7 @@ using System.Web.Http.Dependencies;
 
 namespace Chess.Server.Resolvers
 {
-    public class DbDependencyResolver : IDependencyResolver
+    public class DbDependencyResolver : IDependencyResolver 
     {
         private static AllRepositories<ChessEntities> allRepositories = new AllRepositories<ChessEntities>();
 
