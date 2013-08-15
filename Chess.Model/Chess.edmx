@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChessModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ChessModelStoreContainer">
+          <EntitySet Name="Figures" EntityType="ChessModel.Store.Figures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FigureTypes" EntityType="ChessModel.Store.FigureTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Games" EntityType="ChessModel.Store.Games" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GameStatuses" EntityType="ChessModel.Store.GameStatuses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Messages" EntityType="ChessModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MessagesType" EntityType="ChessModel.Store.MessagesType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="ChessModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="ChessModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Figures_FigureTypes" Association="ChessModel.Store.FK_Figures_FigureTypes">
+            <End Role="FigureTypes" EntitySet="FigureTypes" />
+            <End Role="Figures" EntitySet="Figures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Figures_Games" Association="ChessModel.Store.FK_Figures_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Figures" EntitySet="Figures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_GameStatuses" Association="ChessModel.Store.FK_Games_GameStatuses">
+            <End Role="GameStatuses" EntitySet="GameStatuses" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Users" Association="ChessModel.Store.FK_Games_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Users1" Association="ChessModel.Store.FK_Games_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Games" Association="ChessModel.Store.FK_Messages_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_MessagesType" Association="ChessModel.Store.FK_Messages_MessagesType">
+            <End Role="MessagesType" EntitySet="MessagesType" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Figures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PositionRow" Type="int" Nullable="false" />
+          <Property Name="PositionCol" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="IsWhite" Type="bit" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="IsMoved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FigureTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="nchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WhitePlayerId" Type="int" Nullable="false" />
+          <Property Name="BlackPlayerId" Type="int" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="UserIdInTurn" Type="int" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GameStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="nchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="text" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsMsgRead" Type="bit" Nullable="false" />
+          <Property Name="MsgTypeId" Type="int" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MessagesType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SessionKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuthCode" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Nickname" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Figures_FigureTypes">
+          <End Role="FigureTypes" Type="ChessModel.Store.FigureTypes" Multiplicity="1" />
+          <End Role="Figures" Type="ChessModel.Store.Figures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FigureTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Figures">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Figures_Games">
+          <End Role="Games" Type="ChessModel.Store.Games" Multiplicity="1" />
+          <End Role="Figures" Type="ChessModel.Store.Figures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Figures">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_GameStatuses">
+          <End Role="GameStatuses" Type="ChessModel.Store.GameStatuses" Multiplicity="1" />
+          <End Role="Games" Type="ChessModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Users">
+          <End Role="Users" Type="ChessModel.Store.Users" Multiplicity="1" />
+          <End Role="Games" Type="ChessModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="WhitePlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Users1">
+          <End Role="Users" Type="ChessModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Games" Type="ChessModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="BlackPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Games">
+          <End Role="Games" Type="ChessModel.Store.Games" Multiplicity="1" />
+          <End Role="Messages" Type="ChessModel.Store.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_MessagesType">
+          <End Role="MessagesType" Type="ChessModel.Store.MessagesType" Multiplicity="1" />
+          <End Role="Messages" Type="ChessModel.Store.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessagesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="MsgTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChessModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ChessEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Figures" EntityType="ChessModel.Figure" />
+          <EntitySet Name="FigureTypes" EntityType="ChessModel.FigureType" />
+          <EntitySet Name="Games" EntityType="ChessModel.Game" />
+          <EntitySet Name="GameStatuses" EntityType="ChessModel.GameStatus" />
+          <EntitySet Name="sysdiagrams" EntityType="ChessModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="ChessModel.User" />
+          <AssociationSet Name="FK_Figures_FigureTypes" Association="ChessModel.FK_Figures_FigureTypes">
+            <End Role="FigureTypes" EntitySet="FigureTypes" />
+            <End Role="Figures" EntitySet="Figures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Figures_Games" Association="ChessModel.FK_Figures_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Figures" EntitySet="Figures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_GameStatuses" Association="ChessModel.FK_Games_GameStatuses">
+            <End Role="GameStatuses" EntitySet="GameStatuses" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Users" Association="ChessModel.FK_Games_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Users1" Association="ChessModel.FK_Games_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <EntitySet Name="Messages" EntityType="ChessModel.Message" />
+          <EntitySet Name="MessagesTypes" EntityType="ChessModel.MessagesType" />
+          <AssociationSet Name="FK_Messages_Games" Association="ChessModel.FK_Messages_Games">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_MessagesType" Association="ChessModel.FK_Messages_MessagesType">
+            <End Role="MessagesType" EntitySet="MessagesTypes" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Figure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionRow" Type="Int32" Nullable="false" />
+          <Property Name="PositionCol" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsWhite" Type="Boolean" Nullable="false" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FigureType" Relationship="ChessModel.FK_Figures_FigureTypes" FromRole="Figures" ToRole="FigureTypes" />
+          <NavigationProperty Name="Game" Relationship="ChessModel.FK_Figures_Games" FromRole="Figures" ToRole="Games" />
+          <Property Type="Boolean" Name="IsMoved" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FigureType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Figures" Relationship="ChessModel.FK_Figures_FigureTypes" FromRole="FigureTypes" ToRole="Figures" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="WhitePlayerId" Type="Int32" Nullable="false" />
+          <Property Name="BlackPlayerId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="UserIdInTurn" Type="Int32" />
+          <NavigationProperty Name="Figures" Relationship="ChessModel.FK_Figures_Games" FromRole="Games" ToRole="Figures" />
+          <NavigationProperty Name="GameStatus" Relationship="ChessModel.FK_Games_GameStatuses" FromRole="Games" ToRole="GameStatuses" />
+          <NavigationProperty Name="User" Relationship="ChessModel.FK_Games_Users" FromRole="Games" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="ChessModel.FK_Games_Users1" FromRole="Games" ToRole="Users" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Messages" Relationship="ChessModel.FK_Messages_Games" FromRole="Game" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="GameStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Games" Relationship="ChessModel.FK_Games_GameStatuses" FromRole="GameStatuses" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SessionKey" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AuthCode" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Games" Relationship="ChessModel.FK_Games_Users" FromRole="Users" ToRole="Games" />
+          <NavigationProperty Name="Games1" Relationship="ChessModel.FK_Games_Users1" FromRole="Users" ToRole="Games" />
+          <Property Type="String" Name="Nickname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Figures_FigureTypes">
+          <End Role="FigureTypes" Type="ChessModel.FigureType" Multiplicity="1" />
+          <End Role="Figures" Type="ChessModel.Figure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FigureTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Figures">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Figures_Games">
+          <End Role="Games" Type="ChessModel.Game" Multiplicity="1" />
+          <End Role="Figures" Type="ChessModel.Figure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Figures">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_GameStatuses">
+          <End Role="GameStatuses" Type="ChessModel.GameStatus" Multiplicity="1" />
+          <End Role="Games" Type="ChessModel.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Users">
+          <End Role="Users" Type="ChessModel.User" Multiplicity="1" />
+          <End Role="Games" Type="ChessModel.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="WhitePlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Users1">
+          <End Role="Users" Type="ChessModel.User" Multiplicity="0..1" />
+          <End Role="Games" Type="ChessModel.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="BlackPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Boolean" Name="IsMsgRead" Nullable="false" />
+          <Property Type="Int32" Name="MsgTypeId" Nullable="false" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="ChessModel.FK_Messages_Games" FromRole="Message" ToRole="Game" />
+          <NavigationProperty Name="MessagesType" Relationship="ChessModel.FK_Messages_MessagesType" FromRole="Message" ToRole="MessagesType" />
+        </EntityType>
+        <EntityType Name="MessagesType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Messages" Relationship="ChessModel.FK_Messages_MessagesType" FromRole="MessagesType" ToRole="Message" />
+        </EntityType>
+        <Association Name="FK_Messages_Games">
+          <End Type="ChessModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="ChessModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_MessagesType">
+          <End Type="ChessModel.MessagesType" Role="MessagesType" Multiplicity="1" />
+          <End Type="ChessModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessagesType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="MsgTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChessModelStoreContainer" CdmEntityContainer="ChessEntities">
+          <EntitySetMapping Name="Figures">
+            <EntityTypeMapping TypeName="ChessModel.Figure">
+              <MappingFragment StoreEntitySet="Figures">
+                <ScalarProperty Name="IsMoved" ColumnName="IsMoved" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PositionRow" ColumnName="PositionRow" />
+                <ScalarProperty Name="PositionCol" ColumnName="PositionCol" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="IsWhite" ColumnName="IsWhite" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FigureTypes">
+            <EntityTypeMapping TypeName="ChessModel.FigureType">
+              <MappingFragment StoreEntitySet="FigureTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="ChessModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WhitePlayerId" ColumnName="WhitePlayerId" />
+                <ScalarProperty Name="BlackPlayerId" ColumnName="BlackPlayerId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="UserIdInTurn" ColumnName="UserIdInTurn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameStatuses">
+            <EntityTypeMapping TypeName="ChessModel.GameStatus">
+              <MappingFragment StoreEntitySet="GameStatuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ChessModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ChessModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SessionKey" ColumnName="SessionKey" />
+                <ScalarProperty Name="AuthCode" ColumnName="AuthCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="ChessModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="MsgTypeId" ColumnName="MsgTypeId" />
+                <ScalarProperty Name="IsMsgRead" ColumnName="IsMsgRead" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessagesTypes">
+            <EntityTypeMapping TypeName="ChessModel.MessagesType">
+              <MappingFragment StoreEntitySet="MessagesType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
