@@ -11,7 +11,7 @@ Chess.persisters = (function () {
             this.serviceRootUrl = serviceRootUrl;
             this.user = new UserPersister(serviceRootUrl + "user/");
             this.games = new GamePersister(serviceRootUrl + "game/", this.user);
-            this.battle = new BattlePersister(serviceRootUrl + "battle/", this.user);// dali e figure
+            this.battle = new BattlePersister(serviceRootUrl + "figure/", this.user);// dali e figure
             this.messages = new MessagePersister(serviceRootUrl + "messages/", this.user);
         },
 
@@ -67,7 +67,7 @@ Chess.persisters = (function () {
         register: function (username, nickname, password) {
             var hash = CryptoJS.SHA1(password).toString()
             var self = this;
-            return httpRequester.postJson(this.serviceRootUrl + "register", {
+            return httpRequester.postJson(this.serviceRootUrl + "register/", {
                 username: username,
                 nickname: nickname,
                 authCode: hash
@@ -164,7 +164,7 @@ Chess.persisters = (function () {
 
         move: function (moveOptions, gameId) {
             return httpRequester.postJson(this.serviceRootUrl + gameId + "/move/" + this.userPersister._getSessionKey(), {
-                unitId: moveOptions.unitId,
+                figureId: moveOptions.figureId,
                 position: moveOptions.position
             });
         },

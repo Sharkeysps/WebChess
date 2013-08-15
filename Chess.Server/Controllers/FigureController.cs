@@ -13,6 +13,7 @@
     public class FigureController : ApiController
     {
         private AllRepositories<ChessEntities> data;
+        protected const string UserMessageTypeGameMove = "game-move";
 
         public FigureController(AllRepositories<ChessEntities> data)
         {
@@ -61,17 +62,20 @@
             Chess.Model.User user = userRepository.GetUserBySessionKey(sessionKey);
             if (user == null)
             {
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "No such user found");
+                var httpError = new HttpError("No such user found");
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, httpError);
             }
             var allowedMove = PerformMove(user.Id, gameId, move.FigureId,
                  move.Position.Row, move.Position.Col);
+
             if (allowedMove)
             {
                 return this.Request.CreateResponse(HttpStatusCode.OK, "Move post success");
             }
             else
             {
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "BAD MOVE");
+                var httpError = new HttpError("BAD MOVE");
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, httpError);
             }
 
 
@@ -89,6 +93,14 @@
 
         private bool PerformMove(int userId, int gameId, int figureId, int toRow, int toCol)
         {
+            GameRepository gameRepository = data.GetGameRepository();
+            Game game = gameRepository.Get(gameId);
+
+            if (game.UserIdInTurn != userId)
+            {
+                return false;
+            }
+
             FigureRepository figureRepository = data.GetFigureRepository();
             Figure figure = figureRepository.Get(figureId);
 
@@ -110,7 +122,38 @@
             figure.PositionRow = toRow;
             figure.PositionCol = toCol;
             figureRepository.Update(figureId, figure);
+            
+            if (game.WhitePlayerId == game.UserIdInTurn)
+            {
+                game.UserIdInTurn = game.BlackPlayerId;
+            }
+            else
+            {
+                game.UserIdInTurn = game.WhitePlayerId;
+            }
+
+            gameRepository.Update(game.Id, game);
+
+            UserRepository userRepository = data.GetUserRepository();
+            User userInTurn = userRepository.Get(game.UserIdInTurn.GetValueOrDefault(0));
+
+            var gameStartedMessageText = string.Format("{0} it is your move {1}", userInTurn.Nickname, game.Name);
+
+            MessagesRepository messageRepository = data.GetMessagesRepository();
+            messageRepository.CreateGameMessage(game.Id, game.UserIdInTurn.GetValueOrDefault(0), gameStartedMessageText, UserMessageTypeGameMove);
+            
             return true;
+        }
+
+        protected void SendMessage(string text, User toUser, Game game, MessagesType msgType)
+        {
+            game.Messages.Add(new Message()
+            {
+                UserId = toUser.Id,
+                MessagesType = msgType,
+                IsMsgRead = false,
+                Text = text
+            });
         }
 
         private bool ValidateMove(Figure figure, int toRow, int toCol)

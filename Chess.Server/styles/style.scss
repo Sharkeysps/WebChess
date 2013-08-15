@@ -19,7 +19,7 @@ body {
 		height: 36px;
 		width: 120px;
 		border-radius: 15px;
-		background-color: rgba(128, 128, 128, 0.2);
+		background-color: rgba(128, 128, 128, 0.3);
 	}
 }
 .hidden {
@@ -177,6 +177,7 @@ body {
 #game-state-gridview{
 	margin: 10px auto 0 auto;
 	padding: 0 10px 10px 10px;
+	background-color: rgba(168, 168, 168, 0.8);
 	display:block;
 	width:600px;
 	min-height: 140px;
@@ -188,8 +189,8 @@ body {
 		margin: 0 auto;
 		border-collapse:collapse;
 		tr td{
-			width: 100px;
-			height: 100px;
+			width: 75px;
+			height: 75px;
 			border: 1px solid black;			
 			span{				
 				background-repeat: no-repeat;
@@ -212,8 +213,8 @@ body {
 }
 
 #selected-div{
-	width:50px;
-	height:50px;
+	width:100px;	
+	height:100px;
     background-color: rgba(176, 216, 10, 0.5);
 	display: none;
 }

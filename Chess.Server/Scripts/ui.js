@@ -287,48 +287,50 @@ Chess.ui = (function () {
                 //    }
                 //}
 
-                for(var col in currRow){
+                for (var col in currRow) {
+                    var row1 = parseInt(row) + 1;
+                    var col1 = parseInt(col) + 1;
                     if (!jQuery.isEmptyObject(currRow[col])) {
                         
                         if (currRow[col].type == "Pawn" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedPawn.png)">'+ '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedPawn.png)">'+ '</span> </td>';
                         }
                         else if (currRow[col].type == "King" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedKing.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedKing.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Queen" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedQueen.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedQueen.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Rook" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedRook.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedRook.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Bishop" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedBishop.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedBishop.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Knight" && currRow[col].isWhite == true) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedKnight.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MRedKnight.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Pawn" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBluePawn.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBluePawn.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "King" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueKing.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueKing.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Queen" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueQueen.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueQueen.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Rook" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueRook.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueRook.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Bishop" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueBishop.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueBishop.png)">' + '</span> </td>';
                         }
                         else if (currRow[col].type == "Knight" && currRow[col].isWhite == false) {
-                            resultHtml += '<td id="' + row + '-' + col + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueKnight.png)">' + '</span> </td>';
+                            resultHtml += '<td id="' + row1 + '-' + col1 + '"><span id="' + currRow[col].id + '" style="background-image: url(../images/MBlueKnight.png)">' + '</span> </td>';
                         }
                     }
-                    else{
-                        resultHtml += '<td id="' + row + '-' + col + '"></td>';
+                    else {                        
+                        resultHtml += '<td id="' + row1 + '-' + col1 + '"></td>';
                     }
                 }
 
@@ -369,14 +371,14 @@ Chess.ui = (function () {
                 if (ev.target.parentNode.id == "") {
                     var n = ev.target.id.split("-");
                     gameLoginData = {
-                        position: { x: n[0], y: n[1] },
+                        position: { row: n[0], col: n[1] },
                         unitId: ev.target.parentNode.id
                     };
                 }
                 else {
                     var n = ev.target.parentNode.id.split("-");
                     gameLoginData = {
-                        position: { x: n[0], y: n[1] },
+                        position: { row: n[0], col: n[1] },
                         unitId: ev.target.id
                     };
                 }

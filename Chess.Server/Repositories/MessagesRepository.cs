@@ -8,6 +8,11 @@
 
     public class MessagesRepository : EfRepository<Message>
     {
+        protected const string UserMessageTypeGameStarted = "game-started";
+        protected const string UserMessageTypeGameJoined = "game-joined";
+        protected const string UserMessageTypeGameFinished = "game-finished";
+        protected const string UserMessageTypeGameMove = "game-move";
+
         public MessagesRepository(DbContext context) : base(context)
         {
         }
@@ -26,6 +31,27 @@
             }*/
             this.Context.SaveChanges();
             return result.AsQueryable();
+        }
+
+        public void CreateGameMessage(int gameId, int userId, string messageText, string messageType)
+        {
+            User user = this.Context.Set<User>().First(u => u.Id == userId);
+            Game game = this.Context.Set<Game>().First(g => g.Id == gameId);
+
+            var gameMoveMessageType = this.Context.Set<MessagesType>().First(mt => mt.TypeName == messageType);
+            SendMessage(messageText, user, game, gameMoveMessageType);
+            this.Context.SaveChanges();
+        }
+
+        protected void SendMessage(string text, User toUser, Game game, MessagesType msgType)
+        {
+            game.Messages.Add(new Message()
+            {
+                UserId = toUser.Id,
+                MessagesType = msgType,
+                IsMsgRead = false,
+                Text = text
+            });
         }
 
         internal IQueryable<Message> GetUreadMessagesByUserId(int userId)

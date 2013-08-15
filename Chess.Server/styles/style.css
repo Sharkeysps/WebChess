@@ -7,15 +7,16 @@ div {
   margin: 0; }
 
 body {
-  background-image: url(../images/first-page.jpg);
+  background-image: url(../images/3d-hd-wallpaper-chess-board-picture.jpg);
   background-repeat: no-repeat;
-  background-size: 100% auto; }
+  background-size: 100% auto;
+  color:rgb(205,149,12);
+}
   body .button {
     font-size: 20px;
-    font-family: 'Arial Rounded MT';
+    font-family: Old English Text MT;
     height: 36px;
     width: 120px;
-    border-radius: 15px;
     background-color: rgba(128, 128, 128, 0.2); }
 
 .hidden {
@@ -28,23 +29,31 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
+  color:black;
   margin-bottom: 10px;
-  background-color: burlywood; }
+  background-color: rgb(205,127,50); }
   #top-navbar span {
     font-size: 20px;
-    font-family: 'Arial Rounded MT';
+    font-family: 'Old English Text MT';
     height: 36px;
     line-height: 40px;
     vertical-align: middle;
     padding-left: 15px; }
+#create-game-button {
+    font-family: 'Algerian';
+}
+#create-game-title-input, #create-game-password-input, #create-game-button  {
+    background-color: rgba(255,222,173, 0.7);
+    border:none;
+}
 
 .login-register-container {
   width: 150px;
   padding: 10px;
   margin-top: 40px;
   background-color: rgba(168, 168, 168, 0.7);
-  border: 2px solid rgba(208, 208, 208, 0.8);
-  border-radius: 5px; }
+
+  }
 
 .login-register-container input {
   margin: 5px 0 5px 0; }
@@ -52,15 +61,14 @@ body {
 .login-register-container button {
   width: 70px;
   font-size: 14px;
-  font-family: 'Arial Rounded MT';
+  font-family: 'Algerian';
   margin-top: 5px;
   position: relative;
   left: 50%; }
 
 .control-container {
-  background-color: rgba(168, 168, 168, 0.7);
-  border: 2px solid rgba(208, 208, 208, 0.8);
-  border-radius: 15px;
+  background-color: rgba(84,84,84, 0.7);
+  font-family: 'Algerian';
   display: inline-block; }
   .control-container h3 {
     margin: 15px 25px; }
@@ -83,16 +91,17 @@ body {
   #messages-list ul {
     height: 110px;
     margin: 0 40px 0 0;
+  color:black;
     overflow-y: auto; }
     #messages-list ul li {
       border: 1px solid rgba(208, 208, 208, 0.8);
-      border-radius: 5px;
+
       padding: 3px 15px;
       margin: 3px; }
     #messages-list ul :nth-child(2n) {
-      background-color: #01C4CA; }
+      background-color: rgb(205,149,12); }
     #messages-list ul :nth-child(2n + 1) {
-      background-color: #01D304; }
+      background-color: rgba(255,222,173, 0.7); }
 
 #scores-gridview {
   margin-top: 40px;
@@ -122,7 +131,7 @@ body {
 #active-games-list {
   position: absolute;
   top: 50px;
-  left: 1040px;
+  right: 5px;
   width: 300px;
   min-height: 400px; }
   #active-games-list ul li {
@@ -137,7 +146,6 @@ body {
   width: 600px; }
   #create-game-container input {
     width: 90px;
-    border-radius: 5px;
     margin: 0 10px 0 5px; }
 
 #game-state-gridview {
@@ -153,8 +161,8 @@ body {
     margin: 0 auto;
     border-collapse: collapse; }
     #game-state-gridview table tr td {
-      width: 100px;
-      height: 100px;
+      width: 75px;
+      height: 75px;
       border: 1px solid black; }
       #game-state-gridview table tr td span {
         background-repeat: no-repeat;
@@ -169,8 +177,7 @@ body {
         text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; }
 
 #selected-div {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(176, 216, 10, 0.5);
+  width: 75px;
+  height: 75px;
+  background-color: rgb(205,149,12);
   display: none; }
-

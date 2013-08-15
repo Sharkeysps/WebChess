@@ -303,14 +303,14 @@ Chess.controller = (function () {
                     }
 
                     if (self.unitId != -1 && !jQuery.isEmptyObject(self.targetPosition)) {
-                        if (targetUnitId == undefined) {
-                            self.dataPersister.battle.move({ "unitId": self.unitId, "position": self.targetPosition }, self._fieldData.gameId).then(function () {
+                        //if (targetUnitId == undefined) {
+                            self.dataPersister.battle.move({ "figureId": self.unitId, "position": self.targetPosition }, self._fieldData.gameId).then(function () {
                                 self.updateCurrentGame();
                             }, (function (error) {
                                 alert(error.responseJSON.Message);
                             })).done();
-                        }
-                        else {
+                       // }
+                        /*else {
                             if (targetUnitId != self.unitId) {
                                 self.dataPersister.battle.attack({ "unitId": self.unitId, "position": self.targetPosition }, self._fieldData.gameId).then(function () {
                                     self.updateCurrentGame();
@@ -325,7 +325,7 @@ Chess.controller = (function () {
                                     alert(error.responseJSON.Message);
                                 })).done();
                             }
-                        }
+                        }*/
                         self.unitId = -1;
                         self.targetPosition = {};
                     }
@@ -372,33 +372,33 @@ Chess.controller = (function () {
         processCurrentGameData: function (gameData) {
             var userColor = "";
 
-            if (this._userData.nickname == gameData.red.nickname) {
-                this._gameUserUnits = gameData.red.units;
-                this._gameOpponentUnits = gameData.blue.units;
-                userColor = "red";
+            if (this._userData.nickname == gameData.white.nickname) {
+                this._gameUserUnits = gameData.white.units;
+                this._gameOpponentUnits = gameData.black.units;
+                userColor = "white";
             }
             else {
-                this._gameUserUnits = gameData.blue.units;
-                this._gameOpponentUnits = gameData.red.units;
-                userColor = "blue";
+                this._gameUserUnits = gameData.black.units;
+                this._gameOpponentUnits = gameData.white.units;
+                userColor = "black";
             }
             
             var battleTable = new Array();
-            for (var i = 0; i < 9; i++) {
-                battleTable.push(new Array({},{},{},{},{},{},{},{},{}));
+            for (var i = 0; i < 8; i++) {
+                battleTable.push(new Array({},{},{},{},{},{},{},{}));
             }
 
             var position;
             for (var i in this._gameUserUnits) {
                 var currUserUnits = this._gameUserUnits[i];
                 position = currUserUnits.position;
-                battleTable[position.x][position.y] = currUserUnits;            
+                battleTable[position.row - 1][position.col - 1] = currUserUnits;            
             }
 
             for (var i in this._gameOpponentUnits) {
                 var currOpponentUnits = this._gameOpponentUnits[i];
                 position = currOpponentUnits.position;
-                battleTable[position.x][position.y] = currOpponentUnits;
+                battleTable[position.row - 1][position.col - 1] = currOpponentUnits;
             }
 
             this.battleControl.mainHeader = "Game \"" + gameData.title + "\"";

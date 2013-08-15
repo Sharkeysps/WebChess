@@ -13,8 +13,8 @@ String.prototype.escape = function () {
 };
 
 $(function () {
-    //var serviceRoot = "http://localhost:1813/api/"
-    var serviceRoot = "http://" + location.host + "/api/"
+    var serviceRoot = "http://localhost:1813/api/"
+    //var serviceRoot = "http://" + location.host + "/api/"
     
     var localPersister = Chess.persisters.getPersister(serviceRoot);
     
