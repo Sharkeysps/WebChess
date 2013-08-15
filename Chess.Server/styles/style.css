@@ -67,7 +67,7 @@ body {
   left: 50%; }
 
 .control-container {
-  background-color: rgba(84,84,84, 0.7);
+  background-color: rgba(84,84,84, 0.4);
   font-family: 'Algerian';
   display: inline-block; }
   .control-container h3 {
@@ -181,3 +181,25 @@ body {
   height: 75px;
   background-color: rgb(205,149,12);
   display: none; }
+
+#game-state-gridview table td {
+	    background:#fff;
+	    background:-moz-linear-gradient(top, #fff, #ddd);
+	    background:-webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#ddd));
+	    box-shadow:inset 0 0 0 1px #fff;
+	    -moz-box-shadow:inset 0 0 0 1px #fff;
+	    -webkit-box-shadow:inset 0 0 0 1px #fff;
+	    height:80px;
+	    text-align:center;
+	    vertical-align:middle;
+	    width:80px;
+	}
+	#game-state-gridview table tr:nth-child(odd) td:nth-child(even),
+	#game-state-gridview table tr:nth-child(even) td:nth-child(odd) {
+	    background:#999;
+	    background:-moz-linear-gradient(top, #999, #eee);
+	    background:-webkit-gradient(linear,0 0, 0 100%, from(#999), to(#eee));
+	    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+	    -moz-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+	    -webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+	}
