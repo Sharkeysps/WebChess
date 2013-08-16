@@ -236,9 +236,36 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\archerBlue.png" />
+    <Content Include="Images\archerRed.png" />
+    <Content Include="Images\first-page.jpg" />
+    <Content Include="Images\MBlueBishop.png" />
+    <Content Include="Images\MBlueKing.png" />
+    <Content Include="Images\MBlueKnight.png" />
+    <Content Include="Images\MBluePawn.png" />
+    <Content Include="Images\MBlueQueen.png" />
+    <Content Include="Images\MBlueRook.png" />
+    <Content Include="Images\MRedBishop.png" />
+    <Content Include="Images\MRedKing.png" />
+    <Content Include="Images\MRedKnight.png" />
+    <Content Include="Images\MRedPawn.png" />
+    <Content Include="Images\MRedQueen.png" />
+    <Content Include="Images\MRedRook.png" />
+    <Content Include="Images\warriorBlue.png" />
+    <Content Include="Images\warriorRed.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\class.js" />
+    <Content Include="Scripts\controller.js" />
+    <Content Include="Scripts\cryptojs-sha1.js" />
+    <Content Include="Scripts\data-persister.js" />
+    <Content Include="Scripts\http-requester.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-2.0.2.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-2.0.2.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.2.js" />
+    <Content Include="Scripts\jquery-2.0.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -249,7 +276,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\q.js" />
+    <Content Include="Scripts\q.min.js" />
+    <Content Include="Scripts\ui.js" />
+    <Content Include="styles\style.css">
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -277,6 +311,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="styles\style.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
