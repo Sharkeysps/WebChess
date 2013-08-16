@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Chess.Server.Models
 {
+    //
     [DataContract]
     public class UserLoginModel
     {
