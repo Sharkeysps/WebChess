@@ -12,7 +12,7 @@
     using Chess.Server.Controllers;
     using System.Net;
 
-    public class UserController : BaseApiController
+    public class UserController : ApiController
     {
         private AllRepositories<ChessEntities> data;
 

@@ -115,7 +115,7 @@ Chess.persisters = (function () {
 
         create: function (gameTitle, gamePassword) {
             var gameOptions = {
-                title: gameTitle,
+                Name: gameTitle,
             }
 
             if (gamePassword) {

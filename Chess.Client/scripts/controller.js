@@ -168,7 +168,7 @@ Chess.controller = (function () {
             }).then(function () {
                 // adding message controler after battleControl
                 promisesArr.push(
-                self.messagesList.build(self.controlerContainer, "Messages", [], "text", "messages-list")
+                self.messagesList.build(self.controlerContainer, "Messages", [], "Text", "messages-list")
                 );
                 $("#messages-list").children("ul").attr("id", "scrolling");
             }));
@@ -186,7 +186,7 @@ Chess.controller = (function () {
                 if (self._messages.length >= 10) {
                     self._messages.splice(10, self._messages.length - 10);
                 }
-                self.messagesList.changeData(self._messages, "text");
+                self.messagesList.changeData(self._messages, "Text");
                 document.getElementById("scrolling").scrollTop = document.getElementById("scrolling").scrollHeight;
             }).done();
 
@@ -356,7 +356,7 @@ Chess.controller = (function () {
             this._scheduledDataUpdates.push(setInterval(function () {
                 self.dataPersister.messages.getUserUnread().then(function (messages) {
                     self._messages.push.apply(self._messages, messages);
-                    self.messagesList.changeData(self._messages, "text");
+                    self.messagesList.changeData(self._messages, "Text");
                     for (var i in messages) {
                         if (messages[i].gameId == self._currentGameId) {
                             document.getElementById("scrolling").scrollTop = document.getElementById("scrolling").scrollHeight;

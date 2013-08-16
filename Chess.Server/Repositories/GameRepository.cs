@@ -83,26 +83,23 @@
         public IEnumerable<ActiveGameModel> GetActiveGames(int userId)
         {
             //var user = this.Context.Set<User>().FirstOrDefault(x => x.Id == userId);
+            var games = this.Context.Set<Game>();
             var openStatus = this.Context.Set<GameStatus>().FirstOrDefault(st => st.StatusName == "Active");
-            IEnumerable<ActiveGameModel> activeGames;
+            var inProgressStatus = this.Context.Set<GameStatus>().FirstOrDefault(st => st.StatusName == "InProgress");
+            IEnumerable<ActiveGameModel> activeGames = new List<ActiveGameModel>();
 
-            if (openStatus != null && openStatus.Games.Any())
-            {
-                activeGames =
-                           from game in openStatus.Games
-                           where game.WhitePlayerId == userId
-                           select new ActiveGameModel()
-                           {
-                               Id = game.Id,
-                               Name = game.Name.Trim(),
-                               Creator = this.Context.Set<User>().FirstOrDefault(x => x.Id == game.WhitePlayerId).Nickname.Trim(),
-                               Status = game.GameStatus.StatusName.Trim()
-                           };
-            }
-            else
-            {
-                activeGames = new List<ActiveGameModel>();
-            }
+            activeGames =
+                       from game in games
+                       where (game.WhitePlayerId == userId || game.BlackPlayerId == userId) && (game.StatusId == openStatus.Id || game.StatusId == inProgressStatus.Id)
+                       select new ActiveGameModel()
+                       {
+                           Id = game.Id,
+                           Name = game.Name.Trim(),
+                           Creator = this.Context.Set<User>().FirstOrDefault(x => x.Id == game.WhitePlayerId).Nickname.Trim(),
+                           Status = game.GameStatus.StatusName.Trim()
+                       };
+
+
             return activeGames.ToList();
         }
 
