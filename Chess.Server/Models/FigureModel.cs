@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Chess.Server.Models
 {
+    //Testing
     public class FigureModel
     {
         public int Id { get; set; }
